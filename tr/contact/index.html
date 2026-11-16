@@ -80,7 +80,9 @@
 </section>
 <section>
 <div class="w g2 contact-b">
-<form aria-label="Görüşme talebi" class="form">
+<form action="/contact/send.php" aria-label="Görüşme talebi" class="form" method="post">
+<input name="lang" type="hidden" value="tr"/>
+<div aria-hidden="true" class="hp"><label>Website<input autocomplete="off" name="website" tabindex="-1" type="text"/></label></div>
 <h2 class="d3 blk-h">Görüşme talebi</h2>
 <label class="fld">Ad Soyad *<input autocomplete="name" name="name" type="text"/></label>
 <label class="fld">Kurum *<input autocomplete="organization" name="org" type="text"/></label>
@@ -89,13 +91,14 @@
 <label class="fld">Hangi konuda konuşalım?<select name="topic"><option>Olgunluk teşhisi sonucumu yorumlamak</option><option>Yapay zeka yönetişimi</option><option>ISO 42001 / EU AI Act uyumu</option><option>BT yönetişimi, risk ve uyum</option><option>Teknoloji ve BT stratejisi</option><option>Veri yönetişimi ve kurumsal mimari</option><option>PMO, ITSM ve işletim modeli</option><option>Dijital dönüşüm</option><option>Diğer</option></select></label>
 <label class="fld">Teşhis skorunuz (varsa)<input name="score" type="text"/></label>
 <label class="fld">Kısaca durumunuz<textarea name="msg" rows="4"></textarea></label>
-<label class="consent"><input name="consent" type="checkbox"/><span>Kişisel verilerimin talebime dönüş yapılması amacıyla işlenmesini kabul ediyorum.</span></label>
-<button class="pill solid" type="button">Talebi gönder<svg aria-hidden="true" class="ic" viewbox="0 0 24 24"><circle cx="12" cy="12" r="11"></circle><path d="M10 7.5l4.5 4.5-4.5 4.5"></path></svg></button>
+<label class="consent"><input name="consent" type="checkbox" value="1"/><span>Kişisel verilerimin talebime dönüş yapılması amacıyla işlenmesini kabul ediyorum.</span></label>
+<button class="pill solid" type="submit">Talebi gönder<svg aria-hidden="true" class="ic" viewbox="0 0 24 24"><circle cx="12" cy="12" r="11"></circle><path d="M10 7.5l4.5 4.5-4.5 4.5"></path></svg></button>
+<p aria-live="polite" class="form-msg" data-busy="Gönderiliyor…" data-err="Talebiniz gönderilemedi. Lütfen tekrar deneyin ya da info@itgovernanceturkey.com adresine yazın." data-need="Lütfen zorunlu alanları doldurun, geçerli bir kurumsal e-posta girin ve onay kutusunu işaretleyin." data-ok="Teşekkürler. Talebiniz bize ulaştı; bir iş günü içinde dönüş yapıyoruz." role="status"></p>
 </form>
 <div class="side">
 <div class="hd-l rv">
 <div class="lab">Doğrudan iletişim</div>
-<a class="mail" href="mailto:cantekinertekin@itgovernanceturkey.com">cantekinertekin@<wbr/>itgovernanceturkey.com</a>
+<a class="mail" href="mailto:info@itgovernanceturkey.com">info@<wbr/>itgovernanceturkey.com</a>
 <div class="chipset"><span class="chip">Türkiye</span><span class="chip">Körfez (GCC)</span><span class="chip">Orta Asya</span><span class="chip">Hazar bölgesi</span></div>
 </div>
 <figure class="shot hq rv"><img alt="İstanbul" loading="lazy" src="/assets/img/c-istanbul.jpg"/><figcaption class="cap"><span>Merkez: İstanbul</span></figcaption></figure>

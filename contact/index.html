@@ -80,7 +80,9 @@
 </section>
 <section>
 <div class="w g2 contact-b">
-<form aria-label="Request a conversation" class="form">
+<form action="/contact/send.php" aria-label="Request a conversation" class="form" method="post">
+<input name="lang" type="hidden" value="en"/>
+<div aria-hidden="true" class="hp"><label>Website<input autocomplete="off" name="website" tabindex="-1" type="text"/></label></div>
 <h2 class="d3 blk-h">Request a conversation</h2>
 <label class="fld">Full name *<input autocomplete="name" name="name" type="text"/></label>
 <label class="fld">Organization *<input autocomplete="organization" name="org" type="text"/></label>
@@ -89,13 +91,14 @@
 <label class="fld">What should we talk about?<select name="topic"><option>Interpreting my maturity diagnostic result</option><option>AI governance</option><option>ISO 42001 / EU AI Act compliance</option><option>IT governance, risk and compliance</option><option>Technology and IT strategy</option><option>Data governance and enterprise architecture</option><option>PMO, ITSM and operating model</option><option>Digital transformation</option><option>Other</option></select></label>
 <label class="fld">Your diagnostic score (if any)<input name="score" type="text"/></label>
 <label class="fld">Your situation in brief<textarea name="msg" rows="4"></textarea></label>
-<label class="consent"><input name="consent" type="checkbox"/><span>I agree to my personal data being processed in order to respond to my request.</span></label>
-<button class="pill solid" type="button">Send request<svg aria-hidden="true" class="ic" viewbox="0 0 24 24"><circle cx="12" cy="12" r="11"></circle><path d="M10 7.5l4.5 4.5-4.5 4.5"></path></svg></button>
+<label class="consent"><input name="consent" type="checkbox" value="1"/><span>I agree to my personal data being processed in order to respond to my request.</span></label>
+<button class="pill solid" type="submit">Send request<svg aria-hidden="true" class="ic" viewbox="0 0 24 24"><circle cx="12" cy="12" r="11"></circle><path d="M10 7.5l4.5 4.5-4.5 4.5"></path></svg></button>
+<p aria-live="polite" class="form-msg" data-busy="Sending…" data-err="Your request could not be sent. Please try again or write to info@itgovernanceturkey.com." data-need="Please fill in the required fields, enter a valid corporate email and accept the consent statement." data-ok="Thank you. Your request has reached us; we will get back to you within one business day." role="status"></p>
 </form>
 <div class="side">
 <div class="hd-l rv">
 <div class="lab">Direct contact</div>
-<a class="mail" href="mailto:cantekinertekin@itgovernanceturkey.com">cantekinertekin@<wbr/>itgovernanceturkey.com</a>
+<a class="mail" href="mailto:info@itgovernanceturkey.com">info@<wbr/>itgovernanceturkey.com</a>
 <div class="chipset"><span class="chip">Türkiye</span><span class="chip">Gulf (GCC)</span><span class="chip">Central Asia</span><span class="chip">Caspian region</span></div>
 </div>
 <figure class="shot hq rv"><img alt="İstanbul" loading="lazy" src="/assets/img/c-istanbul.jpg"/><figcaption class="cap"><span>Headquarters: Istanbul</span></figcaption></figure>

@@ -42,19 +42,22 @@
       ct++; panel.classList.remove('fa', 'fb'); panel.classList.add(ct % 2 ? 'fb' : 'fa');
     }); })(t);
   }
-  // contact form: no backend on the static build, so hand the request to the visitor's mail client
-  var form = d.querySelector('form.form');
-  if (form) {
-    var send = form.querySelector('.pill');
-    var go = function (e) {
-      if (e) e.preventDefault();
-      var f = form.elements, need = ['name', 'org', 'email'];
-      for (var k = 0; k < need.length; k++) { if (!f[need[k]].value.trim()) { f[need[k]].focus(); return; } }
-      if (!f.consent.checked) { f.consent.focus(); return; }
-      var lab = function (n) { var l = f[n].closest('label'); return l ? l.firstChild.textContent.replace(/\s*\*\s*$/, '').trim() : n; };
-      var lines = ['name', 'org', 'role', 'email', 'topic', 'score', 'msg'].map(function (n) { return lab(n) + ': ' + f[n].value; });
-      location.href = 'mailto:info@itgovernanceturkey.com?subject=' + encodeURIComponent(form.getAttribute('aria-label') + ' / ' + f.org.value) + '&body=' + encodeURIComponent(lines.join('\n'));
-    };
-    form.addEventListener('submit', go); if (send) send.addEventListener('click', go);
+  // contact form: posts to /contact/send.php (mail + server log); works without JS as a normal POST
+  var form = d.querySelector('form.form'), msg = form && form.querySelector('.form-msg');
+  if (form && msg) {
+    var show = function (kind) { msg.className = 'form-msg ' + (kind === 'ok' ? 'ok' : kind === 'busy' ? '' : 'err'); msg.textContent = msg.getAttribute('data-' + kind) || ''; };
+    var q = location.search;
+    if (/[?&]sent=1/.test(q)) show('ok'); else if (/[?&]error=need/.test(q)) show('need'); else if (/[?&]error=/.test(q)) show('err');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var f = form.elements, mail = f.email.value.trim();
+      if (!f.name.value.trim() || !f.org.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail) || !f.consent.checked) { show('need'); return; }
+      var btn = form.querySelector('button[type=submit]'); btn.disabled = true; show('busy');
+      fetch(form.getAttribute('action'), { method: 'POST', body: new FormData(form), headers: { 'X-Requested-With': 'fetch' } })
+        .then(function (r) { return r.json(); })
+        .then(function (j) { if (j && j.ok) { form.reset(); show('ok'); } else show(j && j.error === 'need' ? 'need' : 'err'); })
+        .catch(function () { show('err'); })
+        .then(function () { btn.disabled = false; msg.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); });
+    });
   }
 })();
