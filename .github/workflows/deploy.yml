@@ -24,7 +24,7 @@ jobs:
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
         run: |
           test -n "$FTP_USER" && test -n "$FTP_PASSWORD" || { echo "FTP_USER / FTP_PASSWORD secrets are missing"; exit 1; }
-          lftp -u "$FTP_USER,$FTP_PASSWORD" ftp.itgovernanceturkey.com <<'LFTP'
+          lftp -u "$FTP_USER,$FTP_PASSWORD" 45.84.207.115 <<'LFTP'
           set cmd:fail-exit yes
           set ftp:ssl-allow yes
           set ssl:verify-certificate no
